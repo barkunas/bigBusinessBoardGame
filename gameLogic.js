@@ -69,6 +69,26 @@ class Game {
         user.currentCell = getNextCell(user, diceSumm);
         var cellConfig = this.config.gameField[user.currentCell]
         switch (cellConfig.type) {
+            case 'inFondCell':
+                var nextUser = setNextUser(room, user);
+                fondCellLogic(user,false);
+                res.send({
+                    diceArr: diceArr,
+                    diceSumm: diceSumm,
+                    nextUser: nextUser,
+                    newBalance: user.balance
+                })
+                break;
+            case 'outFondCell':
+                var nextUser = setNextUser(room, user);
+                fondCellLogic(user,true);
+                res.send({
+                    diceArr: diceArr,
+                    diceSumm: diceSumm,
+                    nextUser: nextUser,
+                    newBalance: user.balance
+                })
+                break;
             default:
                 var nextUser = setNextUser(room, user)
                 res.send({
@@ -80,6 +100,9 @@ class Game {
         }
     }
 };
+function fondCellLogic(user,bool){
+    bool?user.balance+=game.config.trastFondOnePay:user.balance-=game.config.trastFondOnePay;
+}
 function checkSalary(user, nextCell) {
     if (user.currentCell < 20 && nextCell >= 20 && user.salaryLap == user.lap - 1) {
         user.salaryLap++
