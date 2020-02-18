@@ -1,5 +1,6 @@
 var game = { users: {} };
 var usersLinks = {}
+var buildPopup = {}
 function initGame(newData) {
     //ничего не изменилось с последнего раза
     //if (JSON.stringify(newData) === JSON.stringify(game)) { return false };
@@ -22,6 +23,14 @@ function initGame(newData) {
     if (newData.users[sessionStorage.userName].dice) {
         exportRoot.dice_btn_status.gotoAndStop('active');
     } else { exportRoot.dice_btn_status.gotoAndStop('empty'); }
+    //проверка показывать ли попап о строительстве
+    if (newData.accumulateCurrUserForBuyBuild == sessionStorage.userName) {
+        if (Object.keys(buildPopup).length == 0) {
+            buildPopup = getItemFromLibAndplaceInConteiner('buildPopup', exportRoot[`popup_placeholder`]);
+            configureBuildPopup()
+        }
+    }
+
     game = newData;
 }
 function buildBoard() {
@@ -67,7 +76,7 @@ function getGameData() {
                 console.table(data.users)
                 initGame(data)
             })
-    }, 3000)
+    }, 1000)
 }
 function rollDice() {
     clearInterval(gameDataInterval)
@@ -83,7 +92,23 @@ function rollDice() {
             //initGame(data)
             gameDataInterval = getGameData();
         })
-        .fail((data)=>{
+        .fail((data) => {
             gameDataInterval = getGameData();
         })
+}
+function configureBuildPopup(){
+    var userName = sessionStorage.userName;
+    var roomName = sessionStorage.roomName;
+    var accessToken = sessionStorage.accessToken;
+    var path = `/game/buyBuilding/${roomName}/${accessToken}/${userName}`;
+    buildPopup.btn_yes.on('click',function (){
+        $.get(path+'/true')
+        exportRoot.popup_placeholder.removeChild(buildPopup)
+        buildPopup = {}
+    })
+    buildPopup.btn_no.on('click',function (){
+        $.get(path+'/false')
+        exportRoot.popup_placeholder.removeChild(buildPopup)
+        buildPopup = {}
+    })
 }

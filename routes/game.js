@@ -45,7 +45,15 @@ router.get('/getData/:room/:accessToken', function (req, res, next) {
 
 router.get('/rollDice/:room/:accessToken/:user', function (req, res, next) {
     if (!checkAccess(req.params.room, req.params.accessToken)) { res.send('false'); return false }
-    game.gameMove(res,req.params.room, req.params.user)
+    game.gameMove(res, req.params.room, req.params.user)
+})
+router.get('/buyBuilding/:room/:accessToken/:user/:answer', function (req, res, next) {
+    var answer = req.params.answer;
+    if (!checkAccess(req.params.room, req.params.accessToken)) { res.send('false'); return false }
+    if (answer) {
+        var result = game.buyBuilding(req.params.room, req.params.user)
+    } else {result = {error:'error'}}
+    res.send(result)
 })
 function checkAccess(roomName, accessToken) {
     var chekRoomName = game.rooms.hasOwnProperty(roomName);

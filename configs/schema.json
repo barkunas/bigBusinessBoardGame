@@ -12,7 +12,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":1,
-                "name":"NameName Name",
+                "name":"NameName Name1",
                 "cost":[50000],
                 "rent":[5000]
             }
@@ -21,7 +21,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":1,
-                "name":"NameName Name",
+                "name":"NameName Name2",
                 "cost":[50000],
                 "rent":[5000]
             }
@@ -33,7 +33,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":1,
-                "name":"NameName Name",
+                "name":"NameName Name3",
                 "cost":[50000],
                 "rent":[5000]
             }
@@ -45,7 +45,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":2,
-                "name":"NameName Name",
+                "name":"NameName Name4",
                 "cost":[100000],
                 "rent":[5000]
             }
@@ -57,7 +57,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":2,
-                "name":"NameName Name",
+                "name":"NameName Name5",
                 "cost":[90000],
                 "rent":[5000]
             }
@@ -66,7 +66,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":2,
-                "name":"NameName Name",
+                "name":"NameName Name6",
                 "cost":[90000],
                 "rent":[5000]
             }
@@ -81,7 +81,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":3,
-                "name":"NameName Name",
+                "name":"NameName Name7",
                 "cost":[160000],
                 "rent":[5000]
             }
@@ -93,7 +93,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":3,
-                "name":"NameName Name",
+                "name":"NameName Name8",
                 "cost":[180000],
                 "rent":[5000]
             }
@@ -102,7 +102,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":3,
-                "name":"NameName Name",
+                "name":"NameName Name9",
                 "cost":[160000],
                 "rent":[5000]
             }
@@ -114,7 +114,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":4,
-                "name":"NameName Name",
+                "name":"NameName Name10",
                 "cost":[180000],
                 "rent":[5000]
             }
@@ -123,7 +123,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":4,
-                "name":"NameName Name",
+                "name":"NameName Name11",
                 "cost":[170000],
                 "rent":[5000]
             }
@@ -132,7 +132,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":4,
-                "name":"NameName Name",
+                "name":"NameName Name12",
                 "cost":[170000],
                 "rent":[5000]
             }
@@ -144,7 +144,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":5,
-                "name":"NameName Name",
+                "name":"NameName Name13",
                 "cost":[200000],
                 "rent":[5000]
             }
@@ -153,7 +153,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":5,
-                "name":"NameName Name",
+                "name":"NameName Name14",
                 "cost":[200000],
                 "rent":[5000]
             }
@@ -165,7 +165,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":5,
-                "name":"NameName Name",
+                "name":"NameName Name15",
                 "cost":[190000],
                 "rent":[5000]
             }
@@ -177,7 +177,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":6,
-                "name":"NameName Name",
+                "name":"NameName Name16",
                 "cost":[290000],
                 "rent":[5000]
             }
@@ -186,7 +186,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":6,
-                "name":"NameName Name",
+                "name":"NameName Name17",
                 "cost":[240000],
                 "rent":[5000]
             }
@@ -198,7 +198,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":6,
-                "name":"NameName Name",
+                "name":"NameName Name18",
                 "cost":[240000],
                 "rent":[5000]
             }
@@ -210,7 +210,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":7,
-                "name":"NameName Name",
+                "name":"NameName Name19",
                 "cost":[200000],
                 "rent":[5000]
             }
@@ -219,7 +219,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":7,
-                "name":"NameName Name",
+                "name":"NameName Name21",
                 "cost":[200000],
                 "rent":[5000]
             }
@@ -228,7 +228,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":7,
-                "name":"NameName Name",
+                "name":"NameName Name22",
                 "cost":[190000],
                 "rent":[5000]
             }
@@ -243,7 +243,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":8,
-                "name":"NameName Name",
+                "name":"NameName Name23",
                 "cost":[300000],
                 "rent":[5000]
             }
@@ -252,7 +252,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":8,
-                "name":"NameName Name",
+                "name":"NameName Name24",
                 "cost":[300000],
                 "rent":[5000]
             }
@@ -264,7 +264,7 @@
             "type":"buildingCell",
             "building":{
                 "buildingType":8,
-                "name":"NameName Name",
+                "name":"NameName Name25",
                 "cost":[290000],
                 "rent":[5000]
             }

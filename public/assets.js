@@ -116,6 +116,48 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 p.nominalBounds = new cjs.Rectangle(-26,-47.7,77.3,77.3);
 
 
+(lib.Symbol17 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// Layer 1
+	this.shape = new cjs.Shape();
+	this.shape.graphics.f("#FF0000").s().p("AohCRQhFAAAAhGIAAiWQAAhFBFAAIRCAAQBGAAAABFIAACWQAABGhGAAg");
+	this.shape.setTransform(61.5,14.5);
+
+	this.shape_1 = new cjs.Shape();
+	this.shape_1.graphics.f("#FF0000").s().p("AnqCCQg/AAAAg+IAAiHQAAg/A/AAIPVAAQA/AAgBA/IAACHQABA+g/AAg");
+	this.shape_1.setTransform(61.5,14.5);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape,p:{scaleX:1,scaleY:1}}]}).to({state:[{t:this.shape,p:{scaleX:0.9,scaleY:0.9}}]},1).to({state:[{t:this.shape_1}]},1).to({state:[{t:this.shape_1}]},1).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,123,29);
+
+
+(lib.Symbol16 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// Layer 1
+	this.shape = new cjs.Shape();
+	this.shape.graphics.f("#00CC00").s().p("AohCRQhFAAAAhGIAAiWQAAhFBFAAIRCAAQBGAAAABFIAACWQAABGhGAAg");
+	this.shape.setTransform(61.5,14.5);
+
+	this.shape_1 = new cjs.Shape();
+	this.shape_1.graphics.f("#00CC00").s().p("AnaB+Qg8AAAAg8IAAiDQAAg8A8AAIO1AAQA8AAAAA8IAACDQAAA8g8AAg");
+	this.shape_1.setTransform(61.5,14.5);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape,p:{scaleX:1,scaleY:1}}]}).to({state:[{t:this.shape,p:{scaleX:0.87,scaleY:0.87}}]},1).to({state:[{t:this.shape_1}]},1).to({state:[{t:this.shape_1}]},1).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,123,29);
+
+
+(lib.Symbol15 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+}).prototype = getMCSymbolPrototype(lib.Symbol15, null, null);
+
+
 (lib.Symbol14 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
@@ -836,9 +878,49 @@ p.nominalBounds = new cjs.Rectangle(71.5,1.1,31.1,36);
 p.nominalBounds = new cjs.Rectangle(4.7,-40.2,148,99.3);
 
 
+(lib.buildPopup = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// Layer 3
+	this.btn_no = new lib.Symbol17();
+	this.btn_no.parent = this;
+	this.btn_no.setTransform(87.6,76.6,1,1,0,0,0,61.5,14.5);
+	new cjs.ButtonHelper(this.btn_no, 0, 1, 2, false, new lib.Symbol17(), 3);
+
+	this.btn_yes = new lib.Symbol16();
+	this.btn_yes.parent = this;
+	this.btn_yes.setTransform(-92.4,76.6,1,1,0,0,0,61.5,14.5);
+	new cjs.ButtonHelper(this.btn_yes, 0, 1, 2, false, new lib.Symbol16(), 3);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.btn_yes},{t:this.btn_no}]}).wait(1));
+
+	// Layer 1
+	this.text = new cjs.Text("Buy build?", "bold 14px 'Myriad Pro'", "#FFFFFF");
+	this.text.textAlign = "center";
+	this.text.lineHeight = 19;
+	this.text.lineWidth = 100;
+	this.text.alpha = 0.89803922;
+	this.text.parent = this;
+	this.text.setTransform(-8,-93.8);
+
+	this.shape = new cjs.Shape();
+	this.shape.graphics.f("rgba(0,0,0,0.898)").s().p("EgiHARYQhFgBAAhFMAAAggjQAAhGBFAAMBEPAAAQBFAAAABGMAAAAgjQAABFhFABg");
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape},{t:this.text}]}).wait(1));
+
+}).prototype = getMCSymbolPrototype(lib.buildPopup, new cjs.Rectangle(-225.3,-111.1,450.7,222.3), null);
+
+
 // stage content:
 (lib.main = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
+
+	// popup_placeholder
+	this.popup_placeholder = new lib.Symbol15();
+	this.popup_placeholder.parent = this;
+	this.popup_placeholder.setTransform(928.6,478.1,1,1,0,0,0,43.1,43.1);
+
+	this.timeline.addTween(cjs.Tween.get(this.popup_placeholder).wait(1));
 
 	// Layer 7
 	this.cell_0 = new lib.Symbol1();

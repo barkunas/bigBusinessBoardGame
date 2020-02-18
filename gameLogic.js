@@ -40,7 +40,7 @@ class Game {
         if (!this.rooms[roomName].users[userName]) {
             if (countOfUsers >= maxCountOfUsers) { return false };
             this.rooms[roomName].users[userName] = {
-                userName:userName,
+                userName: userName,
                 userPassword: userPassword,
                 currentCell: 0,
                 dice: false,
@@ -60,6 +60,19 @@ class Game {
         };
         return true;
     };
+    buyBuilding(room, user) {
+        var room = this.rooms[room];
+        var user = room.users[user];
+        var currCell = user.currentCell;
+        var building = game.config.gameField[currCell].building
+        room.buildings[building.name] = { userName: user.userName, rentLevel: 0 };
+        user.balance -= building.cost[0]
+        room.users[room.accumulateNextUser].dice = true;
+        delete room.accumulateNextUser;
+        delete room.accumulateCurrUserForBuyBuild;
+        return { buildingCoast: building.cost[0], balance: user.balance }
+
+    }
     gameMove(res, room, user) {
         var room = this.rooms[room];
         var user = room.users[user];
@@ -70,9 +83,31 @@ class Game {
         user.currentCell = getNextCell(user, diceSumm);
         var cellConfig = this.config.gameField[user.currentCell]
         switch (cellConfig.type) {
+            case 'buildingCell':
+                if (checkRent(room, user)) {
+                    var nextUser = setNextUser(room, user);
+                    var rent = rentBuildingLogic(room, user);
+                    res.send({
+                        diceArr: diceArr,
+                        diceSumm: diceSumm,
+                        newBalance: user.balance,
+                        rent: rent
+                    })
+                    break;
+                };
+                if (!isBuilding(room, user)) {
+                    accumulateNextUser(room, user)
+                    res.send({
+                        diceArr: diceArr,
+                        diceSumm: diceSumm,
+                        newBalance: user.balance,
+                        buildingsRequest: true
+                    })
+                    break;
+                };
             case 'inFondCell':
                 var nextUser = setNextUser(room, user);
-                fondCellLogic(user,false);
+                fondCellLogic(user, false);
                 res.send({
                     diceArr: diceArr,
                     diceSumm: diceSumm,
@@ -82,7 +117,7 @@ class Game {
                 break;
             case 'outFondCell':
                 var nextUser = setNextUser(room, user);
-                fondCellLogic(user,true);
+                fondCellLogic(user, true);
                 res.send({
                     diceArr: diceArr,
                     diceSumm: diceSumm,
@@ -101,8 +136,33 @@ class Game {
         }
     }
 };
-function fondCellLogic(user,bool){
-    bool?user.balance+=game.config.trastFondOnePay:user.balance-=game.config.trastFondOnePay;
+function checkRent(room, user) {
+    var buildingName = game.config.gameField[user.currentCell].building.name
+    if (!room.buildings.hasOwnProperty(buildingName)) { return false }
+    if (room.buildings[buildingName].userName == user.userName) { return false }
+    return true
+}
+function isBuilding(room, user){
+    var buildingName = game.config.gameField[user.currentCell].building.name
+    if (room.buildings.hasOwnProperty(buildingName)) { return true }
+    return false
+}
+function accumulateNextUser(room, user) {
+    var userName = user.userName;
+    var usersLength = room.usersArr.length;
+    var userIndex = room.usersArr.indexOf(userName);
+    var nextUserName = userName;
+    if (userIndex == usersLength - 1) {
+        nextUserName = room.usersArr[0];
+    } else {
+        nextUserName = room.usersArr[userIndex + 1];
+    };
+    room.accumulateNextUser = nextUserName;
+    room.accumulateCurrUserForBuyBuild = userName;
+    return nextUserName
+}
+function fondCellLogic(user, bool) {
+    bool ? user.balance += game.config.trastFondOnePay : user.balance -= game.config.trastFondOnePay;
 }
 function checkSalary(user, nextCell) {
     if (user.currentCell < 20 && nextCell >= 20 && user.salaryLap == user.lap - 1) {
@@ -117,7 +177,7 @@ function setNextUser(room, user) {
     var usersLength = room.usersArr.length;
     var userIndex = room.usersArr.indexOf(userName);
     var nextUserName = userName;
-    if (userIndex == usersLength-1) {
+    if (userIndex == usersLength - 1) {
         nextUserName = room.usersArr[0];
     } else {
         nextUserName = room.usersArr[userIndex + 1];
@@ -134,6 +194,17 @@ function getNextCell(user, diceSumm) {
     }
     checkSalary(user, nextCell)
     return nextCell
+}
+function rentBuildingLogic(room, user) {
+    var buildingConfig = game.config.gameField[user.currentCell].building;
+    var buildingName = buildingConfig.name;
+    var rentLevel = room.buildings[buildingName].rentLevel;
+    var rent = buildingConfig.rent[rentLevel];
+    var buildingOwnerName = room.buildings[buildingName].userName;
+    room.users[buildingOwnerName].balance +=rent
+    user.balance -= rent;
+
+    return rent;
 }
 function getRandomDices() {
     return [randomInteger(), randomInteger()]
