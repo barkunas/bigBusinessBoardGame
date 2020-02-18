@@ -1,0 +1,273 @@
+{   
+    "startUserBalance":1400000,
+    "salary":200000,
+    "trastFondOnePay":50000,
+    "maxUsersLimit":5,
+    "minUsersLimit":2,
+    "gameField":[
+        {
+            "type":"startCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":1,
+                "name":"NameName Name",
+                "cost":[50000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":1,
+                "name":"NameName Name",
+                "cost":[50000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"loseCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":1,
+                "name":"NameName Name",
+                "cost":[50000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"taxiCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":2,
+                "name":"NameName Name",
+                "cost":[100000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"successCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":2,
+                "name":"NameName Name",
+                "cost":[90000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":2,
+                "name":"NameName Name",
+                "cost":[90000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"outFondCell"
+        },
+        {
+            "type":"loseCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":3,
+                "name":"NameName Name",
+                "cost":[160000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"taxiCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":3,
+                "name":"NameName Name",
+                "cost":[180000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":3,
+                "name":"NameName Name",
+                "cost":[160000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"successCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":4,
+                "name":"NameName Name",
+                "cost":[180000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":4,
+                "name":"NameName Name",
+                "cost":[170000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":4,
+                "name":"NameName Name",
+                "cost":[170000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"salaryCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":5,
+                "name":"NameName Name",
+                "cost":[200000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":5,
+                "name":"NameName Name",
+                "cost":[200000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"loseCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":5,
+                "name":"NameName Name",
+                "cost":[190000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"taxiCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":6,
+                "name":"NameName Name",
+                "cost":[290000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":6,
+                "name":"NameName Name",
+                "cost":[240000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"successCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":6,
+                "name":"NameName Name",
+                "cost":[240000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"customCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":7,
+                "name":"NameName Name",
+                "cost":[200000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":7,
+                "name":"NameName Name",
+                "cost":[200000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":7,
+                "name":"NameName Name",
+                "cost":[190000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"loseCell"
+        },
+        {
+            "type":"inFondCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":8,
+                "name":"NameName Name",
+                "cost":[300000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":8,
+                "name":"NameName Name",
+                "cost":[300000],
+                "rent":[5000]
+            }
+        },
+        {
+            "type":"successCell"
+        },
+        {
+            "type":"buildingCell",
+            "building":{
+                "buildingType":8,
+                "name":"NameName Name",
+                "cost":[290000],
+                "rent":[5000]
+            }
+        }
+    ]
+}

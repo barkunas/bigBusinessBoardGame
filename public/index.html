@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="./javascripts/notify.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/style.css" />
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="assets.js"></script>
+    <script src="init.js"></script>
+    <script>
+        
+    </script>
+</head>
+
+<body onload="init();">
+
+    <div id='loginBar'>
+        <div id='newRoomBar'>
+            <span class='loginTitleText'>New Room</span>
+        </div>
+        <div id='joinRoomBar'>
+            <span class='loginTitleText'>Log In Room</span>
+        </div>
+    </div>
+    <div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:1126px; height:1000px" class="blur">
+        <canvas id="canvas" width="1126" height="1000"
+            style="position: absolute; display: none; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+        <div id="dom_overlay_container"
+            style="pointer-events:none; overflow:hidden; width:1126px; height:1000px; position: absolute; left: 0px; top: 0px; display: none;">
+        </div>
+    </div>
+    <div id='_preload_div_'
+        style='display: inline-block; height:1000px; width: 1126px; vertical-align:middle;position:absolute;left:0px;top:0px;text-align: center;'>
+        <span style='display: inline-block; height: 100%; vertical-align: middle;'></span> <img
+            src=images/_preloader.gif style='vertical-align: middle; max-height: 100%' /></div>
+    <script src="./javascripts/index.js"></script>
+    <script src="./javascripts/game.js"></script>
+</body>
+
+</html>
