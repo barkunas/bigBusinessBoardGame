@@ -116,7 +116,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 p.nominalBounds = new cjs.Rectangle(-26,-47.7,77.3,77.3);
 
 
-(lib.Symbol13 = function(mode,startPosition,loop) {
+(lib.Symbol14 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// Layer 1
@@ -170,7 +170,7 @@ p.nominalBounds = new cjs.Rectangle(-26,-47.7,77.3,77.3);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_11},{t:this.shape_10},{t:this.shape_9},{t:this.shape_8},{t:this.shape_7},{t:this.shape_6},{t:this.shape_5},{t:this.shape_4},{t:this.shape_3},{t:this.shape_2},{t:this.shape_1},{t:this.shape}]}).wait(1));
 
-}).prototype = getMCSymbolPrototype(lib.Symbol13, new cjs.Rectangle(0,0,170.1,45.5), null);
+}).prototype = getMCSymbolPrototype(lib.Symbol14, new cjs.Rectangle(0,0,170.1,45.5), null);
 
 
 (lib.userIcon = function(mode,startPosition,loop) {
@@ -622,6 +622,20 @@ p.nominalBounds = null;
 }).prototype = getMCSymbolPrototype(lib.Symbol3, new cjs.Rectangle(-1,-50,584.7,354.5), null);
 
 
+(lib.Symbol13 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// Layer 1
+	this.instance = new lib.Symbol14();
+	this.instance.parent = this;
+	this.instance.setTransform(85,22.7,1,1,0,0,0,85,22.7);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(2).to({scaleX:0.86,scaleY:0.86},0).wait(1).to({regY:22.8,scaleX:0.8,scaleY:0.8,y:22.8},0).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,170.1,45.5);
+
+
 (lib.Symbol12 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{empty:0,active:1});
 
@@ -629,18 +643,16 @@ p.nominalBounds = null;
 	this.frame_0 = function() {
 		this.stop();
 	}
-	this.frame_1 = function() {
-		this.diceBtn.addEventListener
-	}
 
 	// actions tween:
-	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1).call(this.frame_1).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(2));
 
 	// Layer 2
 	this.diceBtn = new lib.Symbol13();
 	this.diceBtn.parent = this;
 	this.diceBtn.setTransform(85,22.7,1,1,0,0,0,85,22.7);
 	this.diceBtn.alpha = 0;
+	new cjs.ButtonHelper(this.diceBtn, 0, 1, 2, false, new lib.Symbol13(), 3);
 
 	this.timeline.addTween(cjs.Tween.get(this.diceBtn).wait(1).to({alpha:1},0).wait(1));
 

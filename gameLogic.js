@@ -40,6 +40,7 @@ class Game {
         if (!this.rooms[roomName].users[userName]) {
             if (countOfUsers >= maxCountOfUsers) { return false };
             this.rooms[roomName].users[userName] = {
+                userName:userName,
                 userPassword: userPassword,
                 currentCell: 0,
                 dice: false,
@@ -116,7 +117,7 @@ function setNextUser(room, user) {
     var usersLength = room.usersArr.length;
     var userIndex = room.usersArr.indexOf(userName);
     var nextUserName = userName;
-    if (userIndex >= usersLength) {
+    if (userIndex == usersLength-1) {
         nextUserName = room.usersArr[0];
     } else {
         nextUserName = room.usersArr[userIndex + 1];

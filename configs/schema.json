@@ -269,5 +269,36 @@
                 "rent":[5000]
             }
         }
+    ],
+    "successCards":[
+        {
+            "type":"moveGift"
+        },
+        {
+            "type":"creditsAttantion"
+        },
+        {
+            "type":"customAttantion"
+        },
+        {
+            "type":"addStep"
+        },
+        {
+            "type":"anyGift"
+        }
+    ],
+    "loseCards":[
+        {
+            "type":"moveGift"
+        },
+        {
+            "type":"credits"
+        },
+        {
+            "type":"skipStep"
+        },
+        {
+            "type":"anyGift"
+        }
     ]
 }

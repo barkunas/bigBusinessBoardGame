@@ -55,7 +55,8 @@ function handleComplete(evt,comp) {
 	canvas.style.display = 'block';
 	exportRoot = new lib.main();
 	stage = new lib.Stage(canvas);
-	stage.addChild(exportRoot);	
+	stage.addChild(exportRoot);
+	stage.enableMouseOver();	
 	//Registers the "tick" event listener.
 	fnStartAnimation = function() {
 		createjs.Ticker.setFPS(lib.properties.fps);
