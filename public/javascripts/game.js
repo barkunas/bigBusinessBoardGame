@@ -19,16 +19,16 @@ function initGame(newData) {
         }
     }
     //проверка можно ли бросать кубик
-    if(game.users[sessionStorage.userName].dice){
+    if (newData.users[sessionStorage.userName].dice) {
         exportRoot.dice_btn_status.gotoAndStop('active');
-    } else {exportRoot.dice_btn_status.gotoAndStop('empty');}
+    } else { exportRoot.dice_btn_status.gotoAndStop('empty'); }
     game = newData;
 }
 function buildBoard() {
     if (!sessionStorage.staticData) { return false };
     var boardConfig = JSON.parse(sessionStorage.staticData).config.gameField;
     var boardLength = boardConfig.length;
-    exportRoot.dice_btn_status.diceBtn.on('click',function(){
+    exportRoot.dice_btn_status.diceBtn.on('click', function () {
         rollDice()
     })
     for (i = 0; i < boardLength; i++) {
@@ -45,8 +45,7 @@ function buildBoard() {
     }
     stage.update();
     //first getData
-    getGameData()
-    setInterval(() => getGameData(), 3000)
+    gameDataInterval = getGameData()
 };
 function getItemFromLibAndplaceInConteiner(libItem, goalItem, x = 0, y = 0) {
     var item = new rootLib[libItem]();
@@ -55,18 +54,23 @@ function getItemFromLibAndplaceInConteiner(libItem, goalItem, x = 0, y = 0) {
     goalItem.addChild(item)
     return item;
 }
+var gameDataInterval = 0;
 function getGameData() {
-    var userName = sessionStorage.userName;
-    var roomName = sessionStorage.roomName;
-    var accessToken = sessionStorage.accessToken;
-    var path = `/game/getData/${roomName}/${accessToken}`;
-    $.get(path)
-        .done((data) => {
-            console.log(data)
-            initGame(data)
-        })
+    return setInterval(function () {
+        var userName = sessionStorage.userName;
+        var roomName = sessionStorage.roomName;
+        var accessToken = sessionStorage.accessToken;
+        var path = `/game/getData/${roomName}/${accessToken}`;
+        $.get(path)
+            .done((data) => {
+                console.clear();
+                console.table(data.users)
+                initGame(data)
+            })
+    }, 3000)
 }
-function rollDice(){
+function rollDice() {
+    clearInterval(gameDataInterval)
     exportRoot.dice_btn_status.gotoAndStop('empty');
     var userName = sessionStorage.userName;
     var roomName = sessionStorage.roomName;
@@ -74,7 +78,12 @@ function rollDice(){
     var path = `/game/rollDice/${roomName}/${accessToken}/${userName}`;
     $.get(path)
         .done((data) => {
-            console.log(data)
+            //console.clear()
+            //console.table(data)
             //initGame(data)
+            gameDataInterval = getGameData();
+        })
+        .fail((data)=>{
+            gameDataInterval = getGameData();
         })
 }

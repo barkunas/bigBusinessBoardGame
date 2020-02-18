@@ -128,8 +128,8 @@ function setNextUser(room, user) {
 function getNextCell(user, diceSumm) {
     var teoreticCell = user.currentCell + diceSumm
     var nextCell = teoreticCell
-    if (teoreticCell > 40) {
-        nextCell = teoreticCell - 40
+    if (teoreticCell > 39) {
+        nextCell = teoreticCell - 39
         user.lap++
     }
     checkSalary(user, nextCell)
