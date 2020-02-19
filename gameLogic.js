@@ -36,7 +36,7 @@ class Game {
             return false
         };
         var countOfUsers = Object.keys(this.rooms[roomName].users).length;
-        var maxCountOfUsers = this.config.minUsersLimit;
+        var maxCountOfUsers = this.config.maxUsersLimit;
         if (!this.rooms[roomName].users[userName]) {
             if (countOfUsers >= maxCountOfUsers) { return false };
             this.rooms[roomName].users[userName] = {
@@ -60,29 +60,49 @@ class Game {
         };
         return true;
     };
-    buyBuilding(room, user) {
+    taxiDrive(roomName, userName, answer, res) {
+        var room = this.rooms[roomName];
+        var user = room.users[userName];
+        delete room.accumulateNextUser;
+        delete room.taxi;
+        var direction = answer=='true'?'plus':'minus';
+        this.gameMove(res,roomName,userName,direction)
+    }
+    buyBuilding(room, user,buyOrNot) {
         var room = this.rooms[room];
         var user = room.users[user];
         var currCell = user.currentCell;
         var building = game.config.gameField[currCell].building
-        room.buildings[building.name] = { userName: user.userName, rentLevel: 0 };
-        user.balance -= building.cost[0]
+        if(buyOrNot){
+            
+            room.buildings[building.name] = { userName: user.userName, rentLevel: 0 };
+            user.balance -= building.cost[0]
+        }
         room.users[room.accumulateNextUser].dice = true;
         delete room.accumulateNextUser;
         delete room.accumulateCurrUserForBuyBuild;
         return { buildingCoast: building.cost[0], balance: user.balance }
 
     }
-    gameMove(res, room, user) {
+    gameMove(res, room, user,direction) {
         var room = this.rooms[room];
         var user = room.users[user];
         user.dice = false;
         var data = { room: room, user: user };
         var diceArr = getRandomDices();
         var diceSumm = diceArr[0] + diceArr[1];
-        user.currentCell = getNextCell(user, diceSumm);
+        user.currentCell = getNextCell(user, diceSumm,direction);
         var cellConfig = this.config.gameField[user.currentCell]
         switch (cellConfig.type) {
+            case 'taxiCell':
+                accumulateNextUser(room, user, 'taxi')
+                res.send({
+                    diceArr: diceArr,
+                    diceSumm: diceSumm,
+                    newBalance: user.balance,
+                    taxiRequest: true
+                })
+                break;
             case 'buildingCell':
                 if (checkRent(room, user)) {
                     var nextUser = setNextUser(room, user);
@@ -96,7 +116,7 @@ class Game {
                     break;
                 };
                 if (!isBuilding(room, user)) {
-                    accumulateNextUser(room, user)
+                    accumulateNextUser(room, user, 'accumulateCurrUserForBuyBuild')
                     res.send({
                         diceArr: diceArr,
                         diceSumm: diceSumm,
@@ -142,12 +162,12 @@ function checkRent(room, user) {
     if (room.buildings[buildingName].userName == user.userName) { return false }
     return true
 }
-function isBuilding(room, user){
+function isBuilding(room, user) {
     var buildingName = game.config.gameField[user.currentCell].building.name
     if (room.buildings.hasOwnProperty(buildingName)) { return true }
     return false
 }
-function accumulateNextUser(room, user) {
+function accumulateNextUser(room, user, forWhat) {
     var userName = user.userName;
     var usersLength = room.usersArr.length;
     var userIndex = room.usersArr.indexOf(userName);
@@ -158,7 +178,7 @@ function accumulateNextUser(room, user) {
         nextUserName = room.usersArr[userIndex + 1];
     };
     room.accumulateNextUser = nextUserName;
-    room.accumulateCurrUserForBuyBuild = userName;
+    room[forWhat] = userName;
     return nextUserName
 }
 function fondCellLogic(user, bool) {
@@ -185,14 +205,26 @@ function setNextUser(room, user) {
     room.users[nextUserName].dice = true;
     return nextUserName
 }
-function getNextCell(user, diceSumm) {
-    var teoreticCell = user.currentCell + diceSumm
-    var nextCell = teoreticCell
-    if (teoreticCell > 39) {
-        nextCell = teoreticCell - 39
-        user.lap++
+function getNextCell(user, diceSumm, direction) {
+    switch (direction) {
+        case 'minus':
+            var teoreticCell = user.currentCell - diceSumm
+            var nextCell = teoreticCell
+            if (teoreticCell <0) {
+                nextCell = teoreticCell + 39
+                user.lap--
+            }
+            break;
+        default:
+            var teoreticCell = user.currentCell + diceSumm
+            var nextCell = teoreticCell
+            if (teoreticCell > 39) {
+                nextCell = teoreticCell - 39
+                user.lap++
+            }
+            checkSalary(user, nextCell)
     }
-    checkSalary(user, nextCell)
+
     return nextCell
 }
 function rentBuildingLogic(room, user) {
@@ -201,7 +233,7 @@ function rentBuildingLogic(room, user) {
     var rentLevel = room.buildings[buildingName].rentLevel;
     var rent = buildingConfig.rent[rentLevel];
     var buildingOwnerName = room.buildings[buildingName].userName;
-    room.users[buildingOwnerName].balance +=rent
+    room.users[buildingOwnerName].balance += rent
     user.balance -= rent;
 
     return rent;

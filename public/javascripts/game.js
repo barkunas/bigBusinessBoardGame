@@ -1,6 +1,8 @@
 var game = { users: {} };
 var usersLinks = {}
 var buildPopup = {}
+var taxiPopup = {}
+var cells = []
 function initGame(newData) {
     //ничего не изменилось с последнего раза
     //if (JSON.stringify(newData) === JSON.stringify(game)) { return false };
@@ -9,15 +11,17 @@ function initGame(newData) {
         var user = newData.users[us];
         //юзер никогда не существовал
         if (!game.users.hasOwnProperty(us)) {
-            usersLinks[us] = getItemFromLibAndplaceInConteiner('userIcon', exportRoot[`cell_${user.currentCell}`]);
+            var currentCell = exportRoot[`cell_${user.currentCell}`];
+            usersLinks[us] = getItemFromLibAndplaceInConteiner('userIcon', exportRoot, currentCell.x, currentCell.y);
             game.users[us] = { currentCell: 0 }
             console.log('userIconCreated');
-        }
-        //юзер был но поменялось расположение фишки
+        } else
+        {//юзер был но поменялось расположение фишки
         if (user.currentCell != game.users[us].currentCell) {
-            exportRoot[`cell_${user.currentCell}`].addChild(usersLinks[us]);
+            movedUserIcon(game.users[us].currentCell, user.currentCell, usersLinks[us])
+            //exportRoot[`cell_${user.currentCell}`].addChild(usersLinks[us]);
             console.log('userIconMoved');
-        }
+        }}
     }
     //проверка можно ли бросать кубик
     if (newData.users[sessionStorage.userName].dice) {
@@ -28,6 +32,13 @@ function initGame(newData) {
         if (Object.keys(buildPopup).length == 0) {
             buildPopup = getItemFromLibAndplaceInConteiner('buildPopup', exportRoot[`popup_placeholder`]);
             configureBuildPopup()
+        }
+    }
+    //проверка показывать ли попап о такси
+    if (newData.taxi == sessionStorage.userName) {
+        if (Object.keys(taxiPopup).length == 0) {
+            taxiPopup = getItemFromLibAndplaceInConteiner('taxiPopup', exportRoot[`popup_placeholder`]);
+            configureTaxiPopup()
         }
     }
 
@@ -44,6 +55,7 @@ function buildBoard() {
         let cellName = 'cell_' + i;
         let cellType = boardConfig[i].type;
         let cell = exportRoot[cellName];
+        cells[i] = cell
         cell.gotoAndStop(cellType);
         stage.update()
         switch (cellType) {
@@ -72,8 +84,8 @@ function getGameData() {
         var path = `/game/getData/${roomName}/${accessToken}`;
         $.get(path)
             .done((data) => {
-                console.clear();
-                console.table(data.users)
+                //console.clear();
+                //console.table(data.users)
                 initGame(data)
             })
     }, 1000)
@@ -96,19 +108,57 @@ function rollDice() {
             gameDataInterval = getGameData();
         })
 }
-function configureBuildPopup(){
+function configureBuildPopup() {
     var userName = sessionStorage.userName;
     var roomName = sessionStorage.roomName;
     var accessToken = sessionStorage.accessToken;
     var path = `/game/buyBuilding/${roomName}/${accessToken}/${userName}`;
-    buildPopup.btn_yes.on('click',function (){
-        $.get(path+'/true')
+    buildPopup.btn_yes.on('click', function () {
+        $.get(path + '/true')
         exportRoot.popup_placeholder.removeChild(buildPopup)
         buildPopup = {}
     })
-    buildPopup.btn_no.on('click',function (){
-        $.get(path+'/false')
+    buildPopup.btn_no.on('click', function () {
+        $.get(path + '/false')
         exportRoot.popup_placeholder.removeChild(buildPopup)
         buildPopup = {}
     })
+}
+function configureTaxiPopup(){
+    var userName = sessionStorage.userName;
+    var roomName = sessionStorage.roomName;
+    var accessToken = sessionStorage.accessToken;
+    var path = `/game/taxi/${roomName}/${accessToken}/${userName}`;
+    taxiPopup.btn_yes.on('click', function () {
+        $.get(path + '/true')
+        exportRoot.popup_placeholder.removeChild(taxiPopup)
+        taxiPopup = {}
+    })
+    taxiPopup.btn_no.on('click', function () {
+        $.get(path + '/false')
+        exportRoot.popup_placeholder.removeChild(taxiPopup)
+        taxiPopup = {}
+    })
+}
+function movedUserIcon(fromCellIndex, toCellIndex, userIcon) {
+    var cellsArr = []
+    var ii
+    for (ii = fromCellIndex; ii != toCellIndex+1; ii++) {
+        cellsArr.push(cells[ii])
+        if (ii == cells.length-1) { ii = 0 }
+    }
+    var step = 0;
+    animtion()
+    function animtion() {
+        setTimeout(() => {
+            userIcon.gotoAndPlay('jump')
+        }, 0); 
+        createjs.Tween.get(userIcon).to({ x: cellsArr[step].x, y: cellsArr[step].y },200).call(restartAnim)
+
+    }
+    function restartAnim() {
+        if (step < cellsArr.length-1) {step++; animtion()}
+    }
+
+
 }

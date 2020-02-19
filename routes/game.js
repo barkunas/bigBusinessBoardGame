@@ -48,12 +48,15 @@ router.get('/rollDice/:room/:accessToken/:user', function (req, res, next) {
     game.gameMove(res, req.params.room, req.params.user)
 })
 router.get('/buyBuilding/:room/:accessToken/:user/:answer', function (req, res, next) {
-    var answer = req.params.answer;
+    var answer = req.params.answer == 'true' ? true : false;;
     if (!checkAccess(req.params.room, req.params.accessToken)) { res.send('false'); return false }
-    if (answer) {
-        var result = game.buyBuilding(req.params.room, req.params.user)
-    } else {result = {error:'error'}}
+    var result = game.buyBuilding(req.params.room, req.params.user, answer)
     res.send(result)
+})
+router.get('/taxi/:room/:accessToken/:user/:answer', function (req, res, next) {
+    var answer = req.params.answer
+    if (!checkAccess(req.params.room, req.params.accessToken)) { res.send('false'); return false }
+    game.taxiDrive(req.params.room, req.params.user, answer, res)
 })
 function checkAccess(roomName, accessToken) {
     var chekRoomName = game.rooms.hasOwnProperty(roomName);
